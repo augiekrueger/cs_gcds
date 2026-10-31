@@ -1,29 +1,12 @@
 import random
 
-'''
-List of Functions:
-1. Reverse and display x
-2. Determine the number of vowels. You can prompt user for a particular vowel or x
-create subtotals of each.
-3. Consonant frequency. Bonus: Subtotals of each consonant x 
-4. Return first name. x
-5. Return last name. x
-6. Return middle name(s)
-7. Return boolean if last name contains a hyphen x
-8. Function to convert to lowercase 
-9. Function to convert to uppercase 
-10. Modify array to create a random name (mix up letters) 
-11. Return boolean if first name is a palindrome x
-12. Return full-name as a sorted array of characters (Bonus)
-13. Build a menu (Bonus)
-14. Make initials from name x
-15. Return boolean if name contains a title/distinction (“Dr.”, “Sir”, “Esq”, “Ph.d”) x
-(Bonus)
-17. COME UP WITH YOUR OWN! (Bonus)
-18. Secret Bonus ---See me
-NOTE: For full credit, your code must be documented,
-properly indented, and declarations should be a the top
-'''
+##################################################
+# Student Name: Augie Krueger                    #
+# Course: CS2                                    #
+# Date: September 30, 2026                       #
+# Project: String Functions                      #
+##################################################
+
 def reverser(string):
     '''
     Summary: reverses inputed string
@@ -50,7 +33,7 @@ def count_vowels(string):
     for char in string:
         if char in vowels:
             v_count += 1
-    return v_count
+    print(v_count)
 
 def count_consonants(string):
     '''
@@ -65,7 +48,7 @@ def count_consonants(string):
     for char in string:
         if char in consonants:
             c_count += 1
-    return c_count
+    print(c_count)
 
 def first_name(full_name):
     '''
@@ -85,7 +68,7 @@ def middle_name(full_name):
             
     Output: prints your middle name
     '''
-    print(f"your last name is {full_name.split(' ')[1]}")
+    print(f"your middle name is {full_name.split(' ')[1]}")
 def last_name(full_name):
     '''
     Summary: seperates your last name from your full name
@@ -95,7 +78,6 @@ def last_name(full_name):
     Output: prints your last name
     '''
     print(f"your last name is {full_name.split(' ')[2]}")
-
 def name_hyphen_detector(full_name):
     '''
     Summary: determines whether the your name has a hyphen
@@ -122,12 +104,13 @@ def uppercase(string):
     '''
     lowercase_letters = list("abcdefghijklmnopqrstuvwxyz")
     uppercase_letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    new_string = []
+    new_list = []
     letter_dictionary = {}
     for i in range(len(lowercase_letters)):
         letter_dictionary[lowercase_letters[i]] = uppercase_letters[i]
     for letter in string:
-        new_string.append(letter_dictionary.get(letter, letter))
+        new_list.append(letter_dictionary.get(letter, letter))
+        new_string = "".join(new_list)
     print(new_string)
 
 def lowercase(string):
@@ -140,12 +123,13 @@ def lowercase(string):
     '''
     lowercase_letters = list("abcdefghijklmnopqrstuvwxyz")
     uppercase_letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    new_string = []
+    new_list = []
     letter_dictionary = {}
     for i in range(len(uppercase_letters)):
         letter_dictionary[uppercase_letters[i]] = lowercase_letters[i]
     for letter in string:
-        new_string.append(letter_dictionary.get(letter, letter))
+        new_list.append(letter_dictionary.get(letter, letter))
+        new_string = "".join(new_list)
     print(new_string)
 
 def name_generator(length):
@@ -161,7 +145,7 @@ def name_generator(length):
     
     for i in range(length):
         name += random.choice(charecters)
-    return(name)
+    print(name)
 
 def is_palindrome(string):
     '''
@@ -171,11 +155,14 @@ def is_palindrome(string):
             
     Output: returns true or false
     '''
-    reversed_string = reverser(string)
+    reversed_string = ""
+    for char in string:
+        reversed_string = char + reversed_string  
+
     if string == reversed_string:
-        return True
+        print(True)
     else:
-        return False
+        print(False)
 
 def intitials(full_name):
     '''
@@ -185,9 +172,9 @@ def intitials(full_name):
             
     Output: prints the initials
     '''
-    f_name = first_name(full_name)
-    m_name = middle_name(full_name)
-    l_name = last_name(full_name)
+    f_name = full_name.split(' ')[0]
+    m_name = full_name.split(' ')[1]
+    l_name = full_name.split(' ')[2]
     first_initial = f_name[0]
     middle_initial = m_name[0]
     last_initial = l_name[0]
@@ -202,70 +189,73 @@ def name_title_detector(full_name):
             
     Output: returns true or false
     '''
-    lower_name = full_name.lower
-    for char in lower_name:
-        if char == "dr":
-            title = True
-            break
-        elif char =="sir":
-            title = True
-            break
-        elif char =="esq":
-            title = True
-            break
-        elif char =="ph.d":
-            title = True
+    titles = ["dr", "sir", "esq", "ph.d"]
+    for word in full_name.lower().split():
+        if word.strip(".,") in titles:
+            return True
+    return False
+
+def main():
+    print("input numbers 1-13    "
+    " 1) reverser" \
+    " 2) count_vowels" \
+    " 3) count_consonats"
+    " 4) first_name" \
+    " 5) middle_name" \
+    " 6) last_name"
+    " 7) name_hyphen_detector" \
+    " 8) uppercase" \
+    " 9) lowercase" \
+    " 10) name_generator" \
+    " 11) is_palindrome" \
+    " 12) initials" \
+    " 13) name_title_detector"
+    " q)  quit"
+    )
+    while True:
+        function = input("what function would you like to do?  ")
+        if function == "1":
+            string = input("what string do you want to reverse? ")
+            reverser(string)
+        elif function == "2":
+            string = input("what is your string?  ")
+            count_vowels(string)
+        elif function == "3":
+            string = input("what is your string?  ")
+            count_consonants(string)
+        elif function == "4":
+            full_name = input("what is your full name?  ")
+            first_name(full_name)
+        elif function == "5":
+            full_name = input("what is your full name?  ")
+            middle_name(full_name)
+        elif function == "6":
+            full_name = input("what is your full name?  ")
+            last_name(full_name)
+        elif function == "7":
+            name = input("what is your name?  ")
+            name_hyphen_detector(name)
+        elif function == "8":
+            string = input("what is your string?  ")
+            uppercase(string)
+        elif function == "9":
+            string = input("what is your string?  ")
+            lowercase(string)
+        elif function == "10":
+            length1 = input("what is the length?  ")
+            length2 = int(length1)
+            name_generator(length2)
+        elif function == "11":
+            string = input("what is the string?  ")
+            is_palindrome(string)
+        elif function == "12":
+            full_name = input("what is your full name?  ")
+            intitials(full_name)
+        elif function == "13":
+            full_name = input("what is your full name?  ")
+            name_title_detector(full_name)
+        elif function == "q":
             break
         else:
-            title = False
-    return(title)
-
-while True:
-    def main(function):
-        print("input numbers 1-x"
-        "1) reverser" \
-        "2) count_vowels" \
-        "3) count_consonats"
-        "4) first_name" \
-        "5) middle_name" \
-        "6) last_name"
-        "7) name_hyphen_detector" \
-        "8) uppercase" \
-        "9) lowercase" \
-        "10) name_generator" \
-        "11) is_palindrome" \
-        "12) initials"
-        )
-        function = input("what is your string")
-        if function == 1:
-            string = input("what string do you want to reverse")
-            reverser(string)
-        elif function == 2:
-            string = input("what is your string")
-            count_vowels(string)
-        elif function == 3:
-            string = input("what is your string")
-            count_consonants(string)
-        elif function == 4:
-            name = input("what is your name")
-            first_name(name)
-        elif function == 5:
-            pass
-        elif function == 6:
-            name = input("what is your name")
-            last_name(name)
-        elif function == 7:
-            name = input("what is your name")
-            name_hyphen_detector(name)
-        elif function == 8:
-            string = input("what is your string")
-            uppercase(string)
-        elif function == 9:
-            string = input("what is your string")
-            lowercase(string)
-        elif function == 10:
-            length = ("what is the length")
-            name_generator(length)
-        elif function == 11:
-            string = ("what is the string")
-            is_palindrome(string)
+            print("please answer with a number 1-13 ")
+main()
